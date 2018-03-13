@@ -13,14 +13,15 @@ void setparent(Node n,Node previous){
   n.parent=previous;
 }
 void setchild(Node n,char data,int position,int length){
-  while(lenght!=0){
-    if(n.data==child[length][0]){
+  while(length!=0){
+    if(n.data==n.child[length][0]){
       if(child[length][1]==0){
         child[length][1]=1;
+        current_pointer=child[length][0];
+        break;
       }
     }
   }
-  n.child[position]=data;
 }
 void setparent(Node previous){
   this.setparent=previous;
