@@ -12,13 +12,17 @@ if(x == null || input.size() == 0){
 void setparent(Node n,Node previous){
   n.parent=previous;
 }
-void setchild(Node n,char data,int position,int length){
+void setchild(Node n,char data,int position,int length,int current_pointer,char u){
   while(length!=0){
     if(n.data==n.child[length][0]){
       if(child[length][1]==0){
         child[length][1]=1;
         current_pointer=child[length][0];
         break;
+      }
+      else{
+        u[]= #add internal node;
+        current_pointer=u[];
       }
     }
   }
