@@ -1,4 +1,5 @@
 class Node{
-  public static void main(String[] args) {
-]
+  int data;
+  Node parent;
+  Node child;
 }
