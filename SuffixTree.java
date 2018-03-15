@@ -20,7 +20,9 @@ public class SuffixTree{
   public void beginTreeConstructionProcess(){
 
     int i = 0;
+    int j = 0;
 
+    Node root = new Node(0, null, );
 
     while(sequence_array[i] != '$'){
 
