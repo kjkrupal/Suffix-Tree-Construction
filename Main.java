@@ -24,8 +24,9 @@ public class Main{
 
       char[] alphabet = readAlphabetFile(alphabet_file_name);
 
-      Sequence sequence = new Sequence((String)list.get(0).get(0), (String)list.get(1).get(0), alphabet);
+      SuffixTree tree = new SuffixTree((String)list.get(0).get(0), (String)list.get(1).get(0), alphabet);
 
+      tree.beginTreeConstructionProcess();
     }
     catch(Exception exception){
       System.out.println(exception);

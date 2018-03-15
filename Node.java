@@ -4,8 +4,15 @@ public class Node{
   int id;
   Node suffix_link;
   Node parent;
-  String edge_label;
+  int start;
+  int end;
   HashMap<char, Node> children;
   int depth;
+
+  public Node(Node parent, int start, int end){
+    id++;
+
+    children = new HashMap<>()
+  }
 
 }
