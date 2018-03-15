@@ -18,7 +18,7 @@ public Node(int id, Node parent,String edge_label,HashMap<char,Node> children,in
 
 }
 
-while(s[i]!="$"){
+/*while(s[i]!="$"){
   j=0
   if(#check hash map of j=0 and i=0){
     #call a function for checking
@@ -27,4 +27,4 @@ while(s[i]!="$"){
     #make a new node and update hashtable
   }
 }
-Checking
+Checking*/
