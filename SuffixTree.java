@@ -26,8 +26,7 @@ public class SuffixTree{
     Node node[k] = new Node(0, null, 0, 0, null, 0);
     k++;
     while(sequence_array[i] != '$'){
-      j = 0;
-      if(node[j].children.get(sequence_array[i]) != null){
+      if(root.children.get(sequence_array[i]) != null){
         findPath(node[j].children.get(sequence_array[i]), i);
       }
       else{
@@ -41,21 +40,22 @@ public class SuffixTree{
       }*/
 
     public void findPath(Node present, int i){
-
-      int n = present.end - present.start;
-      int p = present.start;
-
-      while(n != 0){
-        if(sequence_array[i] == sequence_array[p]){
-          n--;
-          p++;
+        if(match){
+        if(child is present){
+          if( the length of edge label == n)
+           make the edge
+           else (Call function findpath( pass the node, edge_label of node +1))
+        }
         }
         if(mismatch){
-          break at mismatch point
+                  if( the child matches the key of the child present in the hashmap)
+                  call findPath(current node and i)
+                  else(create a new node which has the characters of string and his child as null
+                        create a new node at the point of mismatch which will have children same as his parent
+                        his parent's children will be updated with the point of mismatch till end and the new string mismatch point)
+                  )
         }
-        if(n == 0){
-          check(if any hashmap (send parameters j and i=(i+length.edge_label)))
-        }
+
       }
 
   }
