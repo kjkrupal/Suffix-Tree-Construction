@@ -2,62 +2,60 @@ public class SuffixTree{
   String sequence_name;
   String sequence;
 
-  char[] sequence_array;
+  char[] string;
   char[] alphabet;
 
-  int sequence_length;
+  int n;
   int alphabet_length;
 
   public SuffixTree(String sequence, String sequence_name, char[] alphabet){
     this.sequence_name = sequence_name;
     this.sequence = sequence + "$";
-    this.sequence_length = sequence.length();
-    this.sequence_array = this.sequence.toCharArray();
+    this.n = sequence.length();
+    this.string = this.sequence.toCharArray();
     this.alphabet = alphabet;
     this.alphabet_length = alphabet.length;
   }
 
   public void beginTreeConstructionProcess(){
 
-    int i = 0; //checking sequence
-    int j = 0; //for checking internal node
-    int k = 0; //for keeping count of nodes
-    Node node[] = new Node[2 * sequence_length - 1];
-    Node node[k] = new Node(0, null, 0, 0, null, 0);
-    k++;
-    while(sequence_array[i] != '$'){
-      if(root.children.get(sequence_array[i]) != null){
-        findPath(node[j].children.get(sequence_array[i]), i);
-      }
-      else{
-        node[k] = new Node(k, node[j], i, sequence_length, null, sequence_length - i);
-      }
+    int i = 0;
 
-      /*if(check hashmap of node[j] and sequence_array[i]){
-        call a function( for matching the children's edge_label of n[j] and sequence_array[i])
-        else
-        make a new node with with i as start n[j] as parent
-      }*/
+    //Create root node with id 0 and everything set to null
+    Node root = new Node(0, null, -1, -1, null, 0);
 
-    public void findPath(Node present, int i){
-        if(match){
-        if(child is present){
-          if( the length of edge label == n)
-           make the edge
-           else (Call function findpath( pass the node, edge_label of node +1))
-        }
-        }
-        if(mismatch){
-                  if( the child matches the key of the child present in the hashmap)
-                  call findPath(current node and i)
-                  else(create a new node which has the characters of string and his child as null
-                        create a new node at the point of mismatch which will have children same as his parent
-                        his parent's children will be updated with the point of mismatch till end and the new string mismatch point)
-                  )
-        }
+    //Begin iteration for string starting from 0 till n
+    while(string[i] != '$'){
 
-      }
+      //Call findPath method with root as present node because this while will always begin from root node
+      findPath(root, i);
+
+      //findPath creates node for i-th suffix, so increment i for next iteration
+      i++;
+    }
 
   }
 
+  public void findPath(Node present, int i){
+
+    //The following block executes when the present node doesn't have any children
+    if(present.children == null){
+
+      //Since no children create a new child
+      present.children = new HashMap<char, Node>();
+
+      //Put key-value pair in the newly created HashMap
+      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
+    }
+
+    /* The following block executes when the present node has a child but
+    doesn't have a child corresponding to current character in the string */
+
+    else if(present.children.get(string[i]) == null){
+
+      //Add a new child in the existing HashMap
+      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i))
+    }
+
+  }
 }
