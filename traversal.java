@@ -1,5 +1,5 @@
-class traversal{
-    Tree=Sort( children of each node; start with root)
+public class traversal{
+    /* Tree=Sort( children of each node; start with root)
     Print_Tree( print_tree node_children != Null)
       Print_Tree(print_Tree node_children ++ )
 
@@ -8,6 +8,7 @@ class traversal{
         (i.e. from the the position of that character in the sting -1 or position-1)
         print the character retrieved.
 
+<<<<<<< HEAD
 }
 DFS( node u)
 {
@@ -32,4 +33,7 @@ public static boolean DFS(Node root, int k){
       if (i>0)BWT[k++]=s[i-1];
       else{ BWT[k++]='$';}
     }
+=======
+        */
+>>>>>>> 8ba15985496a3f9af4107d8ef9c6b10fab83a8d9
 }
