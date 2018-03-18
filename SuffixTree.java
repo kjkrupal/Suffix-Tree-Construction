@@ -110,6 +110,26 @@ public class SuffixTree{
         }
 
       }
+      /* The follwing will execute if the string is exhausted on the internal node. There are two cases that are possible
+      1. There will be a child for the next character so go to that child node and repeat findPath process
+      2. There will not be any child for the next character so simply create a child and finish */
+
+      //The following will execute if there is no child with next character
+      if(present.children.get(string[i]) == null){
+
+        //Create a new child of present node with string starting from next character
+        present.children.put(string[i], new Node(i, present, i, n, null, present.depth + (n - i + 1)));
+
+        //Get out of the function
+        return true;
+      }
+      //The following will execute if there is a child with next character
+      else{
+
+        //rRecursively call the findPath function with updated parent and starting position
+        findPath(present.children.get(string[i]), i)
+      }
+
 
     }
 
