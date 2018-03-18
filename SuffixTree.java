@@ -35,8 +35,7 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
-    System.out.println(root.children);
-    System.out.println(root.children.get('N').children);
+    
 
   }
 
@@ -52,7 +51,7 @@ public class SuffixTree{
       present.children = new TreeMap<Character, Node>();
 
       //Put key-value pair in the newly created TreeMap
-      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
     }
 
     /* The following block executes when the present node has a child but
@@ -61,7 +60,7 @@ public class SuffixTree{
     else if(present.children.get(string[i]) == null){
 
       //Add a new child in the existing TreeMap
-      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
     }
     //The following block executes if the present node has a child corresponding to the character
     else{
@@ -91,6 +90,7 @@ public class SuffixTree{
           present.children.put(string[id], new Node(id, present, child.start, start - 1, null,
                                                     present.depth + (child.start - start)));
 
+
           //Get reference of newly created internal node
           Node new_internal_node = present.children.get(string[id]);
 
@@ -109,6 +109,7 @@ public class SuffixTree{
           //The following line creates a new leaf node
           new_internal_node.children.put(string[i], new Node(i, child_1.parent, i, n, null, n-i));
 
+
           //Get out of while loop
           return true;
 
@@ -120,10 +121,10 @@ public class SuffixTree{
       2. There will not be any child for the next character so simply create a child and finish */
 
       //The following will execute if there is no child with next character
-      if(present.children.get(string[i]) == null){
+      if(child.children.get(string[i]) == null){
 
         //Create a new child of present node with string starting from next character
-        present.children.put(string[i], new Node(i, present, i, n, null, present.depth + (n - i + 1)));
+        child.children.put(string[i], new Node(i, present, i, n, null, present.depth + (n - i + 1)));
 
         //Get out of the function
         return true;
@@ -132,7 +133,7 @@ public class SuffixTree{
       else{
 
         //Recursively call the findPath function with updated parent and starting position
-        findPath(present.children.get(string[i]), i);
+        findPath(present.children.get(string[id]), i);
       }
 
 
