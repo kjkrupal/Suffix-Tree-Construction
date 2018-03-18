@@ -1,4 +1,4 @@
-import java.Util.HashMap;
+import java.Util.TreeMap;
 
 public class Node{
   int id;
@@ -6,10 +6,10 @@ public class Node{
   Node parent;
   int start;
   int end;
-  HashMap<char, Node> children;
+  TreeMap<char, Node> children;
   int depth;
 
-  public Node(int id, Node parent, int start, int end, HashMap<char,Node> children, int depth){
+  public Node(int id, Node parent, int start, int end, TreeMap<char,Node> children, int depth){
     this.id = id;
     this.parent = parent;
     this.start = start;
