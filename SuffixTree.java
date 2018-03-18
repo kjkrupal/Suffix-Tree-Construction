@@ -27,7 +27,7 @@ public class SuffixTree{
     Node root = new Node(0, null, -1, -1, null, 0);
 
     //Begin iteration for string starting from 0 till n
-    while(string[i] != '$'){
+    while(i != n + 1){
 
       //Call findPath method with root as present node because this while-loop will always begin from root node
       findPath(root, i);
@@ -35,12 +35,14 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
-    new Node();
+    System.out.println(root.children);
+    System.out.println(root.children.get('N').children);
 
   }
 
   public boolean findPath(Node present, int i){
 
+    //Preserve the current index i in id
     int id = i;
 
     //The following block executes when the present node doesn't have any children

@@ -20,8 +20,4 @@ public class Node{
     this.count++;
   }
 
-  public Node(){
-    System.out.println(count);
-  }
-
 }
