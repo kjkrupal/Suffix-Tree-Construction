@@ -7,4 +7,29 @@ class traversal{
         get the first character at each node and try spelling out the whole String
         (i.e. from the the position of that character in the sting -1 or position-1)
         print the character retrieved.
+
+}
+DFS( node u)
+{
+  if(node.children!= NULL)
+  {
+    DFS(node.children && not visited)
+  }
+}
+char BWT[] = new char[sequnce_length];
+int k =0;
+public static boolean DFS(Node root, int k){
+    if(root == null){
+        return false;
+    } else if (root.data == k){
+        return true;
+    } else {
+        return DFS(root.left, k) || DFS(root.right, k);
+    }
+    if(node.children == NULL)
+    {
+      int i= suffix_link of node;
+      if (i>0)BWT[k++]=s[i-1];
+      else{ BWT[k++]='$';}
+    }
 }
