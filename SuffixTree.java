@@ -1,3 +1,5 @@
+import java.util.TreeMap;
+
 public class SuffixTree{
   String sequence_name;
   String sequence;
@@ -33,6 +35,7 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
+    new Node();
 
   }
 
@@ -44,7 +47,7 @@ public class SuffixTree{
     if(present.children == null){
 
       //Since no children create a new child
-      present.children = new TreeMap<char, Node>();
+      present.children = new TreeMap<Character, Node>();
 
       //Put key-value pair in the newly created TreeMap
       present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
@@ -93,7 +96,7 @@ public class SuffixTree{
           child_1.parent = new_internal_node;
 
           //Create a new TreeMap of children for internal node
-          new_internal_node.children = new TreeMap<char, Node>();
+          new_internal_node.children = new TreeMap<Character, Node>();
 
           //Put child_1 reference as child into newly created TreeMap
           new_internal_node.children.put(string[start], child_1);
@@ -102,7 +105,7 @@ public class SuffixTree{
           child_1.start = start;
 
           //The following line creates a new leaf node
-          new_internal_node.children.put(string[i], new Node(i, chaild_1.parent, i, n, null, n-i));
+          new_internal_node.children.put(string[i], new Node(i, child_1.parent, i, n, null, n-i));
 
           //Get out of while loop
           return true;
@@ -126,12 +129,12 @@ public class SuffixTree{
       //The following will execute if there is a child with next character
       else{
 
-        //rRecursively call the findPath function with updated parent and starting position
-        findPath(present.children.get(string[i]), i)
+        //Recursively call the findPath function with updated parent and starting position
+        findPath(present.children.get(string[i]), i);
       }
 
 
     }
-
+    return false;
   }
 }

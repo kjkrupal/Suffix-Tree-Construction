@@ -1,4 +1,4 @@
-import java.Util.TreeMap;
+import java.util.TreeMap;
 
 public class Node{
   int id;
@@ -6,16 +6,22 @@ public class Node{
   Node parent;
   int start;
   int end;
-  TreeMap<char, Node> children;
+  TreeMap<Character, Node> children;
   int depth;
+  int count;
 
-  public Node(int id, Node parent, int start, int end, TreeMap<char,Node> children, int depth){
+  public Node(int id, Node parent, int start, int end, TreeMap<Character,Node> children, int depth){
     this.id = id;
     this.parent = parent;
     this.start = start;
     this.end = end;
     this.children = children;
     this.depth = depth;
+    this.count++;
+  }
+
+  public Node(){
+    System.out.println(count);
   }
 
 }
