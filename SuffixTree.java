@@ -35,11 +35,15 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
+<<<<<<< HEAD
     //System.out.println(root.children);
     //System.out.println(root.children.get('I').children.get('S'));
     for(int j = root.children.get('S').children.get('I').start; j <= root.children.get('S').children.get('I').end; j++){
       System.out.print(string[j] + " ");
     }
+=======
+
+>>>>>>> 0ba73fbfdb8c023d8c2683fb436cad757936bc9d
 
   }
 
@@ -57,9 +61,7 @@ try{
       present.children = new TreeMap<Character, Node>();
 
       //Put key-value pair in the newly created TreeMap
-      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
-      //if(i==6){ System.out.println(present.children.get('S'));
-      //System.out.println(present);
+      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
     }
 
     /* The following block executes when the present node has a child but
@@ -68,7 +70,7 @@ try{
     else if(present.children.get(string[i]) == null){
 
       //Add a new child in the existing TreeMap
-      present.children.put(string[i], new Node(i + 1, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
     }
     //The following block executes if the present node has a child corresponding to the character
     else{
@@ -96,6 +98,7 @@ try{
           present.children.put(string[id], new Node(id, present, child.start, start - 1, null,
                                                     present.depth + (child.start - start)));
 
+
           //Get reference of newly created internal node
           Node new_internal_node = present.children.get(string[id]);
 
@@ -114,6 +117,7 @@ try{
 
           //The following line creates a new leaf node
           new_internal_node.children.put(string[i], new Node(i, child_1.parent, i, n, null, n-i));
+
 
           //Get out of while loop
           return true;
@@ -138,7 +142,7 @@ try{
       else{
 
         //Recursively call the findPath function with updated parent and starting position
-        findPath(present.children.get(string[i]), i);
+        findPath(present.children.get(string[id]), i);
       }
 
 
