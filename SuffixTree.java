@@ -35,9 +35,6 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
-    for(int j = root.children.get('I').children.get('S').children.get('S').start; j <= root.children.get('I').children.get('S').children.get('S').end; j++){
-      System.out.print(string[j] + " ");
-    }
 
   }
 
@@ -134,7 +131,7 @@ public class SuffixTree{
       else{
 
         //Recursively call the findPath function with updated parent and starting position
-        findPath(child.children.get(string[id]), i);
+        findPath(present.children.get(string[id]), i);
       }
 
 
