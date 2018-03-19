@@ -27,7 +27,7 @@ public class SuffixTree{
     Node root = new Node(0, null, -1, -1, null, 0);
 
     //Begin iteration for string starting from 0 till n
-    while(i != n +1 ){
+    while(i != n + 1){
 
       //Call findPath method with root as present node because this while-loop will always begin from root node
       findPath(root, i);
@@ -35,14 +35,14 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
-    for(int j = root.children.get('S').children.get('I').start; j <= root.children.get('S').children.get('I').end; j++){
+    for(int j = root.children.get('S').children.get('I').children.get('S').start; j <= root.children.get('S').children.get('I').children.get('S').end; j++){
       System.out.print(string[j] + " ");
     }
 
   }
 
   public boolean findPath(Node present, int i){
-try{
+
     //Preserve the current index i in id
     int id = i;
 
@@ -87,7 +87,7 @@ try{
           Node child_1 = present.children.get(string[id]);
 
           //The following line creates a new internal node
-          present.children.put(string[id], new Node(id, present, child.start, start - 1, null,
+          present.children.put(string[id], new Node(id + 1, present, child.start, start - 1, null,
                                                     present.depth + (child.start - start)));
 
 
@@ -108,7 +108,7 @@ try{
           child_1.start = start;
 
           //The following line creates a new leaf node
-          new_internal_node.children.put(string[i], new Node(i, child_1.parent, i, n, null, n-i));
+          new_internal_node.children.put(string[i], new Node(id + 2, child_1.parent, i, n, null, n-i));
 
 
           //Get out of while loop
@@ -125,7 +125,7 @@ try{
       if(child.children.get(string[i]) == null){
 
         //Create a new child of present node with string starting from next character
-        child.children.put(string[i], new Node(i, present, i, n, null, present.depth + (n - i + 1)));
+        child.children.put(string[i], new Node(id + 1, present, i, n, null, present.depth + (n - i + 1)));
 
         //Get out of the function
         return true;
@@ -139,10 +139,7 @@ try{
 
 
     }
-  }
-  catch(Exception e) {
-    e.printStackTrace();
-  }
+  
    return false;
   }
 
