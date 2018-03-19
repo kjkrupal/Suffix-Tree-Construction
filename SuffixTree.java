@@ -7,7 +7,7 @@ public class SuffixTree{
   char[] string;
   char[] alphabet;
 
-  int n;
+  int n,count1=0,count2=0,count3=0;
   int alphabet_length;
 
   public SuffixTree(String sequence, String sequence_name, char[] alphabet){
@@ -36,6 +36,7 @@ public class SuffixTree{
       i++;
     }
 
+    System.out.println(count1+ " " +count2+ " " +count3);
   }
 
   public boolean findPath(Node present, int i){
@@ -64,7 +65,7 @@ public class SuffixTree{
     //The following block executes if the present node has a child corresponding to the character
     else{
       //Get the child node from the parent corresponding to character
-      Node child = present.children.get(string[i]);
+      Node child = present.children.get(string[i]);count3++;
 
       //Store child node's start and end index into temporary variables
       int start = child.start;
@@ -81,7 +82,7 @@ public class SuffixTree{
           /*Since now we have to create an internal node between the present node and it's child,
           the following line will get the refernce of present node's child so that it can be used to
           update the values present node's child according to the newly added internal node */
-          Node child_1 = present.children.get(string[id]);
+          Node child_1 = present.children.get(string[id]);count1++;
 
           //The following line creates a new internal node
           present.children.put(string[id], new Node(id + 1, present, child.start, start - 1, null,
@@ -89,7 +90,7 @@ public class SuffixTree{
 
 
           //Get reference of newly created internal node
-          Node new_internal_node = present.children.get(string[id]);
+          Node new_internal_node = present.children.get(string[id]);count2++;
 
           //Update child_1's parent
           child_1.parent = new_internal_node;
