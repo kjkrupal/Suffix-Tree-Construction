@@ -35,7 +35,13 @@ public class SuffixTree{
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
     }
+<<<<<<< HEAD
   
+=======
+    for(int j = root.children.get('I').children.get('S').children.get('S').start; j <= root.children.get('I').children.get('S').children.get('S').end; j++){
+      System.out.print(string[j] + " ");
+    }
+>>>>>>> 953a27d237690a5ab88293ae9565c685bc16834d
 
   }
 
