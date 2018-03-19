@@ -27,13 +27,16 @@ public class SuffixTree{
     Node root = new Node(0, null, -1, -1, null, 0);
 
     //Begin iteration for string starting from 0 till n
-    while(i != n +1 ){
+    while(i != n + 1){
 
       //Call findPath method with root as present node because this while-loop will always begin from root node
       findPath(root, i);
 
       //findPath creates node for i-th suffix, so increment i for next iteration
       i++;
+    }
+    for(int j = root.children.get('S').children.get('I').children.get('S').start; j <= root.children.get('S').children.get('I').children.get('S').end; j++){
+      System.out.print(string[j] + " ");
     }
 
   }
@@ -42,9 +45,7 @@ public class SuffixTree{
 try{
     //Preserve the current index i in id
     int id = i;
-    if(i==6) {System.out.println(present.start);
-      System.out.println(string[i]);
-    }
+
     //The following block executes when the present node doesn't have any children
     if(present.children == null){
 
