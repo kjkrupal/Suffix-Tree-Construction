@@ -1,14 +1,18 @@
 import java.util.TreeMap;
+import java.util.ArrayList;
 
 public class SuffixTree{
   String sequence_name;
   String sequence;
 
+  int temp_id;
+  int leaf_id;
   char[] string;
   char[] alphabet;
 
   int n;
   int alphabet_length;
+  ArrayList <Integer> index = new ArrayList<Integer>();
 
   public SuffixTree(String sequence, String sequence_name, char[] alphabet){
     this.sequence_name = sequence_name;
@@ -24,11 +28,12 @@ public class SuffixTree{
     int i = 0;
 
     //Create root node with id 0 and everything set to null
-    Node root = new Node(0, null, -1, -1, null, 0);
+    Node root = new Node(temp_id, null, -1, -1, null, 0);
 
     //Begin iteration for string starting from 0 till n
     while(i != n + 1){
 
+      leaf_id++;
       //Call findPath method with root as present node because this while-loop will always begin from root node
       findPath(root, i);
 
@@ -36,8 +41,29 @@ public class SuffixTree{
       i++;
     }
 
+    traverse(root, '$');
+
+    for(int k : index){
+      if(k == -1)
+        System.out.println(string[n]);
+      else
+        System.out.println(string[k]);
+    }
+
   }
 
+  public void traverse(Node node, char c){
+
+    if(node.children == null){
+      index.add(node.id - 2);
+    }
+    else{
+      for(char ch : node.children.keySet()){
+        //System.out.print(ch);
+        traverse(node.children.get(ch), ch);
+      }
+    }
+  }
   public boolean findPath(Node present, int i){
 
     //Preserve the current index i in id
@@ -50,7 +76,7 @@ public class SuffixTree{
       present.children = new TreeMap<Character, Node>();
 
       //Put key-value pair in the newly created TreeMap
-      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(leaf_id, present, i, n, null, n - i));
     }
 
     /* The following block executes when the present node has a child but
@@ -59,7 +85,7 @@ public class SuffixTree{
     else if(present.children.get(string[i]) == null){
 
       //Add a new child in the existing TreeMap
-      present.children.put(string[i], new Node(id + 1, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(leaf_id, present, i, n, null, n - i));
     }
     //The following block executes if the present node has a child corresponding to the character
     else{
@@ -84,7 +110,7 @@ public class SuffixTree{
           Node child_1 = present.children.get(string[id]);
 
           //The following line creates a new internal node
-          present.children.put(string[id], new Node(id + 1, present, child.start, start - 1, null,
+          present.children.put(string[id], new Node(temp_id++, present, child.start, start - 1, null,
                                                     present.depth + (child.start - start)));
 
 
@@ -105,7 +131,7 @@ public class SuffixTree{
           child_1.start = start;
 
           //The following line creates a new leaf node
-          new_internal_node.children.put(string[i], new Node(id + 2, child_1.parent, i, n, null, n-i));
+          new_internal_node.children.put(string[i], new Node(leaf_id, child_1.parent, i, n, null, n-i));
 
 
           //Get out of while loop
@@ -122,7 +148,7 @@ public class SuffixTree{
       if(child.children.get(string[i]) == null){
 
         //Create a new child of present node with string starting from next character
-        child.children.put(string[i], new Node(id + 1, present, i, n, null, present.depth + (n - i + 1)));
+        child.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
 
         //Get out of the function
         return true;
