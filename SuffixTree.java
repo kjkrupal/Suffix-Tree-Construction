@@ -134,7 +134,7 @@ public class SuffixTree{
       else{
 
         //Recursively call the findPath function with updated parent and starting position
-        findPath(present.children.get(string[id]), i);
+        findPath(child.children.get(string[id]), i);
       }
 
 
