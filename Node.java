@@ -8,7 +8,7 @@ public class Node{
   int end;
   TreeMap<Character, Node> children;
   int depth;
-  int count;
+  static int count;
 
   public Node(int id, Node parent, int start, int end, TreeMap<Character,Node> children, int depth){
     this.id = id;
@@ -17,7 +17,12 @@ public class Node{
     this.end = end;
     this.children = children;
     this.depth = depth;
-    this.count++;
+    count++;
   }
+
+  public Node(){
+    System.out.println(count);
+  }
+
 
 }
