@@ -90,7 +90,7 @@ public class SuffixTree{
     //The following block executes if the present node has a child corresponding to the character
     else{
       //Get the child node from the parent corresponding to character
-      Node child = present.children.get(string[i]);count3++;
+      Node child = present.children.get(string[i]);
 
       //Store child node's start and end index into temporary variables
       int start = child.start;
@@ -107,7 +107,7 @@ public class SuffixTree{
           /*Since now we have to create an internal node between the present node and it's child,
           the following line will get the refernce of present node's child so that it can be used to
           update the values present node's child according to the newly added internal node */
-          Node child_1 = present.children.get(string[id]);count1++;
+          Node child_1 = present.children.get(string[id]);
 
           //The following line creates a new internal node
           present.children.put(string[id], new Node(temp_id++, present, child.start, start - 1, null,
@@ -115,7 +115,7 @@ public class SuffixTree{
 
 
           //Get reference of newly created internal node
-          Node new_internal_node = present.children.get(string[id]);count2++;
+          Node new_internal_node = present.children.get(string[id]);
 
           //Update child_1's parent
           child_1.parent = new_internal_node;
