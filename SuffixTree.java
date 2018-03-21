@@ -76,7 +76,7 @@ public class SuffixTree{
       present.children = new TreeMap<Character, Node>();
 
       //Put key-value pair in the newly created TreeMap
-      present.children.put(string[i], new Node(leaf_id, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
     }
 
     /* The following block executes when the present node has a child but
@@ -85,7 +85,7 @@ public class SuffixTree{
     else if(present.children.get(string[i]) == null){
 
       //Add a new child in the existing TreeMap
-      present.children.put(string[i], new Node(leaf_id, present, i, n, null, n - i));
+      present.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
     }
     //The following block executes if the present node has a child corresponding to the character
     else{
@@ -111,7 +111,7 @@ public class SuffixTree{
 
           //The following line creates a new internal node
           present.children.put(string[id], new Node(temp_id++, present, child.start, start - 1, null,
-                                                    present.depth + (child.start - start)));
+                                                    present.depth + (start - child.start)));
 
 
           //Get reference of newly created internal node
@@ -131,7 +131,7 @@ public class SuffixTree{
           child_1.start = start;
 
           //The following line creates a new leaf node
-          new_internal_node.children.put(string[i], new Node(leaf_id, child_1.parent, i, n, null, n-i));
+          new_internal_node.children.put(string[i], new Node(leaf_id, child_1.parent, i, n, null, child_1.parent.depth + (n - i + 1)));
 
 
           //Get out of while loop
