@@ -41,9 +41,6 @@ public class SuffixTree{
       i++;
     }
 
-<<<<<<< HEAD
-    System.out.println(count1+ " " +count2+ " " +count3);
-=======
     traverse(root, '$');
 
     for(int k : index){
@@ -53,7 +50,6 @@ public class SuffixTree{
         System.out.println(string[k]);
     }
 
->>>>>>> 966a942b9b538384dda22b579af14a4b623b88fd
   }
 
   public void traverse(Node node, char c){
