@@ -27,7 +27,6 @@ public class SuffixTree{
 
     int i = 0;
 
-    String nama = "Change";
     //Create root node with id 0 and everything set to null
     Node root = new Node(temp_id, null, -1, -1, null, 0);
 
