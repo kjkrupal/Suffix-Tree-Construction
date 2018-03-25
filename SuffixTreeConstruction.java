@@ -50,110 +50,102 @@ public class SuffixTreeConstruction{
     }
 
     System.out.println(root.children);
-    traverse(root, '$');
+    traverse(root);
 
-    //System.out.println(index);
-    try{
     for(int k : index){
       if(k == -1)
         System.out.println(string[n - 1]);
       else
         System.out.println(string[k]);
     }
-  }
-  catch(Exception e){
-    e.printStackTrace();
-  }
 
   }
 
-    public ArrayList generalizedSuffixLink(Node previous_suffix, int i){
-      ArrayList pack = new ArrayList();
-      Node v = null;
-      int index = 0;
-      try{
+  public ArrayList generalizedSuffixLink(Node previous_suffix, int i){
+    ArrayList pack = new ArrayList();
+    Node v = null;
+    int index = 0;
+    try{
+      //Inital case when 1st suffix is being inserted
+      if(previous_suffix.parent == null){
 
-        //Inital case when 1st suffix is being inserted
-        if(previous_suffix.parent == null){
+        v = previous_suffix;
+        index = i;
+      }
+      else{
+        //Parent exists
+        Node u = previous_suffix.parent;
 
-          v = previous_suffix;
-          index = i;
-        }
-        else{
-          //Parent exists
-          Node u = previous_suffix.parent;
+        //Case 1
+        if(u.suffix_link != null){
+          //Case 1A
+          if(u.parent != null){
+            //System.out.println("Case 1A");
 
-          //Case 1
-          if(u.suffix_link != null){
-            //Case 1A
-            if(u.parent != null){
-              //System.out.println("Case 1A");
-
-              int alpha = u.depth - 1;
-              index = i + alpha;
-              v = u.suffix_link;
-            }
-            //Case 1B
-            else{
-              //System.out.println("Case 1B");
-
-              v = u.suffix_link;
-              index = i;
-
-            }
+            int alpha = u.depth - 1;
+            index = i + alpha;
+            v = u.suffix_link;
           }
-          //Case 2
+          //Case 1B
           else{
-            Node u_prime = u.parent;
+            //System.out.println("Case 1B");
+            v = u.suffix_link;
+            index = i;
 
-            //Case 2A
-            if(u_prime.parent != null){
-              //System.out.println("Case 2A");
-
-              int alpha_prime = u_prime.depth - 1;
-              Node v_prime = u_prime.suffix_link;
-              String beta = sequence.substring(u.start, u.end + 1);
-
-              v = nodeHop(v_prime, i + alpha_prime, beta);
-
-              u.suffix_link = v;
-
-              index = i + v.depth;
-            }
-            //Case 2B
-            else{
-              //System.out.println("Case 2B");
-
-              Node v_prime = u_prime.suffix_link;
-
-              if(u.depth == 1){
-                v = u_prime;
-              }
-              else{
-                String beta = sequence.substring(u.start + 1, u.end + 1);
-
-                v = nodeHop(v_prime, i, beta);
-              }
-              u.suffix_link = v;
-
-              index = i + v.depth;
-
-            }
           }
         }
+        //Case 2
+        else{
+          Node u_prime = u.parent;
 
+          //Case 2A
+          if(u_prime.parent != null){
+            //System.out.println("Case 2A");
+
+            int alpha_prime = u_prime.depth - 1;
+            Node v_prime = u_prime.suffix_link;
+            String beta = sequence.substring(u.start, u.end + 1);
+
+            v = nodeHop(v_prime, i + alpha_prime, beta);
+
+            u.suffix_link = v;
+
+            index = i + v.depth;
+          }
+          //Case 2B
+          else{
+            //System.out.println("Case 2B");
+
+            Node v_prime = u_prime.suffix_link;
+
+            if(u.depth == 1){
+              v = u_prime;
+            }
+            else{
+              String beta = sequence.substring(u.start + 1, u.end + 1);
+
+              v = nodeHop(v_prime, i, beta);
+            }
+            u.suffix_link = v;
+
+            index = i + v.depth;
+
+          }
+        }
       }
-      catch(Exception e){
-        e.printStackTrace();
-      }
-      //System.out.println("Hello: " + v);
-      pack.add(v);
-      pack.add(index);
-      return pack;
+
+    }
+    catch(Exception e){
+      e.printStackTrace();
     }
 
+    pack.add(v);
+    pack.add(index);
+    return pack;
+  }
+
   public Node findPath(Node v, int i){
-    try{
+
     //Preserve the current index i in id
     int id = i;
 
@@ -264,21 +256,11 @@ public class SuffixTreeConstruction{
         //Recursively call the findPath function with updated parent and starting position
         return findPath(v.children.get(string[id]), i);
       }
-
-
     }
-
-
-  }
-  catch(Exception e){
-    e.printStackTrace();
-  }
-
-  return null;
   }
 
   public Node nodeHop(Node v_prime, int i, String beta){
-    try{
+
     Node temp = v_prime.children.get(beta.charAt(0));
 
     int temp_string_length = temp.end - temp.start + 1;
@@ -313,26 +295,15 @@ public class SuffixTreeConstruction{
       return v;
     }
   }
-  catch(Exception e){
-    e.printStackTrace();
-  }
-  return null;
-  }
-  public void traverse(Node node, char c){
-    try{
-      if(node.children == null){
-        index.add(node.id - 2);
-      }
-      else{
-        for(char ch : node.children.keySet()){
-          //System.out.print(ch);
-          traverse(node.children.get(ch), ch);
-        }
-      }
-    }
-    catch(Exception e){
-        e.printStackTrace();
-    }
-  }
+  public void traverse(Node node){
 
+    if(node.children == null){
+      index.add(node.id - 2);
+    }
+    else{
+      for(char ch : node.children.keySet()){
+        traverse(node.children.get(ch));
+      }
+    }
+  }
 }
