@@ -77,7 +77,7 @@ public class SuffixTree{
 
       //Put key-value pair in the newly created TreeMap
       present.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
-      System.out.println("The depth of " + q + " node is " + present.children.get(string[i]).depth);
+      System.out.println("The depth of node " +q+ " is " +present.children.get(string[i]).depth );
       q++;
     }
 
@@ -88,7 +88,7 @@ public class SuffixTree{
 
       //Add a new child in the existing TreeMap
       present.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
-      System.out.println("The depth of " + q + " node is " +present.children.get(string[i]).depth);
+      System.out.println("The depth of node " +q+ " is " +present.children.get(string[i]).depth );
       q++;
     }
     //The following block executes if the present node has a child corresponding to the character
@@ -116,9 +116,8 @@ public class SuffixTree{
           //The following line creates a new internal node
           present.children.put(string[id], new Node(temp_id++, present, child.start, start - 1, null,
                                                     present.depth + (start - child.start)));
-                                                    System.out.println("The depth of " + q + " node is " +present.children.get(string[id]).depth);
+                                                    System.out.println("The depth of node " +q+ " is " +present.children.get(string[i]).depth );
                                                     q++;
-
 
           //Get reference of newly created internal node
           Node new_internal_node = present.children.get(string[id]);
@@ -138,7 +137,7 @@ public class SuffixTree{
 
           //The following line creates a new leaf node
           new_internal_node.children.put(string[i], new Node(leaf_id, child_1.parent, i, n, null, child_1.parent.depth + (n - i + 1)));
-          System.out.println("The depth of " + q + " node is " +new_internal_node.children.get(string[i]).depth);
+          System.out.println("The depth of node " +q+ " is " +new_internal_node.children.get(string[i]).depth );
           q++;
 
           //Get out of while loop
@@ -156,7 +155,7 @@ public class SuffixTree{
 
         //Create a new child of present node with string starting from next character
         child.children.put(string[i], new Node(leaf_id, present, i, n, null, present.depth + (n - i + 1)));
-        System.out.println("The depth of" + q + " node is " +child.children.get(string[i]).depth);
+        System.out.println("The depth of node " +i+ " is " + child.children.get(string[i]).depth );
         q++;
 
         //Get out of the function
