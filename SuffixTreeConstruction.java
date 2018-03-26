@@ -5,7 +5,10 @@ public class SuffixTreeConstruction{
 
   String sequence_name;
   String sequence;
-
+  Node first;
+  int start;
+  int end;
+  int max;
   int n;
   int node_id;
   int leaf_id;
@@ -26,10 +29,16 @@ public class SuffixTreeConstruction{
   }
 
   public void createSuffixTree(){
-
+    //Initialize the starting index
     int i = 0;
+
+    //Initialize root node
     Node root = new Node(node_id, null, -1, -1, null, 0, null);
+
+    //Set the suffix link of root to root itself
     root.suffix_link = root;
+
+    //Initialize the previous suffix to root
     Node previous_suffix = root;
 
     while(i != n){
@@ -49,15 +58,15 @@ public class SuffixTreeConstruction{
       i++;
     }
 
-    System.out.println(root.children);
-    traverse(root);
+    //Display children of a node
+    displayChildren(root);
 
-    for(int k : index){
-      if(k == -1)
-        System.out.println(string[n - 1]);
-      else
-        System.out.println(string[k]);
-    }
+    //Output the BWT index
+    printBWTIndex(root);
+
+    //Print the indexes of longest exact matching repeating string
+    exactMatchingRepeat(root);
+
 
   }
 
@@ -295,15 +304,77 @@ public class SuffixTreeConstruction{
       return v;
     }
   }
+
+  public void printBWTIndex(Node root){
+
+    traverse(root);
+
+    for(int k : index){
+      if(k == -1)
+        System.out.println(string[n - 1]);
+      else
+        System.out.println(string[k]);
+    }
+  }
+
   public void traverse(Node node){
 
     if(node.children == null){
       index.add(node.id - 2);
     }
     else{
+
       for(char ch : node.children.keySet()){
         traverse(node.children.get(ch));
       }
     }
   }
+
+  public void exactMatchingRepeat(Node root){
+
+    for (char c : root.children.keySet() ) {
+      if(c == '$' || root.children.get(c).children == null){
+        continue;
+      }
+      else{
+        this.first = root.children.get(c);
+
+        lastInternalNode(this.first);
+      }
+    }
+
+    System.out.println(start + " " + end);
+  }
+
+  public void lastInternalNode(Node first){
+
+    int diff;
+    int s;
+    int e;
+
+    for(char d : first.children.keySet()){
+      if(first.children.get(d).children == null){
+        Node last = first;
+        s = this.first.start;
+        e = last.end;
+
+        diff = e - s + 1;
+
+        if(max < diff){
+          max = diff;
+          this.start = s;
+          this.end = e;
+        }
+
+      }
+      else{
+        lastInternalNode(first.children.get(d));
+      }
+    }
+  }
+
+  public void displayChildren(Node node){
+    System.out.println(node.children);
+  }
+
 }
